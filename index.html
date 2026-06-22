@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PPL Quiz">
+  <title>EASA PPL Quiz Test</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="appHeader">
+      <div>
+        <h1>EASA PPL Quiz</h1>
+        <p>Communications • Test Version</p>
+      </div>
+      <div class="pill" id="progressPill">1 / 6</div>
+    </header>
+
+    <section id="startScreen" class="screen card">
+      <h2>Quiz Test</h2>
+      <p>This is a small test version. It works like a real quiz: choose A/B/C/D, get feedback, then see your final score.</p>
+      <button class="primary" onclick="startQuiz()">Start Quiz</button>
+    </section>
+
+    <section id="quizScreen" class="screen card hidden">
+      <div class="topRow">
+        <span class="badge" id="cardId"></span>
+        <span class="subject" id="subject"></span>
+      </div>
+      <h2 id="questionText"></h2>
+      <div id="options"></div>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="nextBtn" class="primary" disabled onclick="nextQuestion()">Next</button>
+    </section>
+
+    <section id="resultScreen" class="screen card hidden">
+      <h2>Final Result</h2>
+      <div class="score" id="scoreText"></div>
+      <p id="resultText"></p>
+      <div id="missedList" class="missed"></div>
+      <button class="primary" onclick="restartQuiz()">Restart</button>
+    </section>
+  </main>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
