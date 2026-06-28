@@ -1,3 +1,11 @@
-# AviPrep v0.2.0
+# AviPrep v0.3.0
 
-Includes new UI, Study Mode, Quiz Mode, Wrong Answers, Statistics, local progress, and Communications sample data.
+Full rebuild with exam-style Quiz Mode.
+
+## Included
+- Study Mode with immediate answer/explanation
+- Quiz Mode with no feedback until the final score
+- Review Mistakes after score
+- Saved Wrong Answers
+- Statistics
+- Local progress storage
