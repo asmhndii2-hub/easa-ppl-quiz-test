@@ -1,8 +1,11 @@
 {
-  "name": "EASA PPL Quiz Test",
-  "short_name": "PPL Quiz",
-  "start_url": "index.html",
+  "name": "AviPrep",
+  "short_name": "AviPrep",
+  "description": "EASA PPL study and quiz app",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b1220",
-  "theme_color": "#0b1220"
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "orientation": "portrait",
+  "icons": []
 }
