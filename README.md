@@ -1,11 +1,3 @@
-# AviPrep v0.3.0
+# AviPrep v0.4.0
 
-Full rebuild with exam-style Quiz Mode.
-
-## Included
-- Study Mode with immediate answer/explanation
-- Quiz Mode with no feedback until the final score
-- Review Mistakes after score
-- Saved Wrong Answers
-- Statistics
-- Local progress storage
+Adds Local Profiles for 4 users. Each profile has separate progress, wrong answers, bookmarks, and last study position.
