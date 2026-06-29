@@ -1,3 +1,5 @@
-# AviPrep v0.4.0
+# DebriefRoom v0.6.0 Foundation
 
-Adds Local Profiles for 4 users. Each profile has separate progress, wrong answers, bookmarks, and last study position.
+Full identity change from AviPrep to DebriefRoom.
+
+Includes transponder ON/ALT illustrated questions and question verification status.

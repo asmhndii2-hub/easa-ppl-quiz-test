@@ -1,11 +1,11 @@
 {
-  "name": "AviPrep",
-  "short_name": "AviPrep",
-  "description": "EASA PPL study and quiz app",
+  "name": "DebriefRoom",
+  "short_name": "DebriefRoom",
+  "description": "Train. Debrief. Master. EASA PPL study and quiz platform.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#07111f",
-  "theme_color": "#07111f",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
   "orientation": "portrait",
   "icons": []
 }
