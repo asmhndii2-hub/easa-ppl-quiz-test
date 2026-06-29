@@ -1,3 +1,6 @@
-# DebriefRoom v0.7.1 Student Experience
+# DebriefRoom v0.8.1 UI Polish & Trust
 
-Subject-first flow, Continue Learning Card, Next above Previous, 20-question Quiz, and Debrief Summary.
+- Top-right label changed to subtle version text.
+- Improved transponder illustrations with single active mode and aligned selector.
+- Added question position hierarchy.
+- Exam Tips hidden when empty.
