@@ -13,7 +13,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "C",
     "explanation": "2500 is transmitted as thousands plus hundreds: too tousand fife hundred.",
-    "examTip": "Altitude pronunciation tests standard aviation wording.",
+    "examTip": "",
     "image": null
   },
   {
@@ -30,7 +30,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "D",
     "explanation": "Frequencies are transmitted digit by digit, using decimal.",
-    "examTip": "Use decimal, not point.",
+    "examTip": "",
     "image": null
   },
   {
@@ -47,7 +47,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "D",
     "explanation": "Roger means the last transmission has been received. It does not mean you will comply.",
-    "examTip": "Roger = received. Wilco = received and will comply.",
+    "examTip": "",
     "image": null
   },
   {
@@ -64,7 +64,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "D",
     "explanation": "Squawk 7700 is the general emergency code.",
-    "examTip": "7700 emergency, 7600 radio failure, 7500 unlawful interference.",
+    "examTip": "",
     "image": null
   },
   {
@@ -81,8 +81,8 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "B",
     "explanation": "In ON mode, the transponder replies with the selected code only. ALT mode is required for code plus pressure altitude.",
-    "examTip": "ON = code only. ALT = code + pressure altitude.",
-    "image": "assets/transponder_7000_on.svg"
+    "examTip": "",
+    "image": "assets/transponder_7000_on_v2.svg"
   },
   {
     "id": "COM-006",
@@ -98,8 +98,8 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "C",
     "explanation": "In ALT mode, the transponder transmits the selected squawk code and pressure altitude.",
-    "examTip": "ON sends code only; ALT sends code + pressure altitude.",
-    "image": "assets/transponder_7000_alt.svg"
+    "examTip": "",
+    "image": "assets/transponder_7000_alt_v2.svg"
   },
   {
     "id": "COM-007",
@@ -115,7 +115,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "C",
     "explanation": "Readability 3 means readable but with difficulty.",
-    "examTip": "Readability scale: 1 unreadable, 5 perfectly readable.",
+    "examTip": "",
     "image": null
   },
   {
@@ -132,7 +132,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "B",
     "explanation": "ATIS provides automatic terminal information.",
-    "examTip": "ATIS = Automatic Terminal Information Service.",
+    "examTip": "",
     "image": null
   },
   {
@@ -149,7 +149,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "C",
     "explanation": "Distress means grave and imminent danger requiring immediate assistance.",
-    "examTip": "Distress = MAYDAY. Urgency = PAN PAN.",
+    "examTip": "",
     "image": null
   },
   {
@@ -166,7 +166,7 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     },
     "correct": "B",
     "explanation": "Standby means wait; the other station will call you back when ready.",
-    "examTip": "Standby is not permission to continue your message.",
+    "examTip": "",
     "image": null
   }
 ];
