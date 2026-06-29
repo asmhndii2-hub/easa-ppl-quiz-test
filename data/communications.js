@@ -1,10 +1,8 @@
 window.DEBRIEFROOM_COMMUNICATIONS = [
   {
     "id": "COM-001",
-    "subject": "Communications",
     "topic": "Phraseology",
     "difficulty": "Core",
-    "source": "Seed",
     "status": "paper_verified",
     "question": "The correct pronunciation for transmitting an altitude of 2500 is:",
     "options": {
@@ -14,20 +12,14 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
       "D": "Too fife zero zero"
     },
     "correct": "C",
-    "explanation": "In radiotelephony, 2500 is transmitted as thousands plus hundreds: “too tousand fife hundred.”",
-    "examTip": "Altitude pronunciation questions test standard aviation pronunciation.",
-    "image": null,
-    "tags": [
-      "numbers",
-      "altitude"
-    ]
+    "explanation": "2500 is transmitted as thousands plus hundreds: too tousand fife hundred.",
+    "examTip": "Altitude pronunciation tests standard aviation wording.",
+    "image": null
   },
   {
     "id": "COM-002",
-    "subject": "Communications",
     "topic": "Frequencies",
     "difficulty": "Core",
-    "source": "Seed",
     "status": "paper_verified",
     "question": "The correct RTF phraseology for frequency 121.275 MHz is:",
     "options": {
@@ -37,21 +29,16 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
       "D": "One two one decimal two seven five"
     },
     "correct": "D",
-    "explanation": "Frequencies are transmitted digit by digit, using “decimal” for the decimal point.",
-    "examTip": "Use “decimal”, not “point”, in aviation RTF.",
-    "image": null,
-    "tags": [
-      "frequency"
-    ]
+    "explanation": "Frequencies are transmitted digit by digit, using decimal.",
+    "examTip": "Use decimal, not point.",
+    "image": null
   },
   {
     "id": "COM-003",
-    "subject": "Communications",
     "topic": "Phraseology",
     "difficulty": "Core",
-    "source": "Seed",
     "status": "paper_verified",
-    "question": "The word “Roger” has the meaning:",
+    "question": "The word Roger has the meaning:",
     "options": {
       "A": "I understand your last transmission",
       "B": "Received and understood",
@@ -61,18 +48,12 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     "correct": "D",
     "explanation": "Roger means the last transmission has been received. It does not mean you will comply.",
     "examTip": "Roger = received. Wilco = received and will comply.",
-    "image": null,
-    "tags": [
-      "roger",
-      "wilco"
-    ]
+    "image": null
   },
   {
     "id": "COM-004",
-    "subject": "Communications",
     "topic": "Transponder",
     "difficulty": "Core",
-    "source": "Seed",
     "status": "verified",
     "question": "The transponder should be set to which code in the event of an emergency?",
     "options": {
@@ -82,19 +63,14 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
       "D": "7700"
     },
     "correct": "D",
-    "explanation": "Squawk 7700 is the general emergency transponder code.",
+    "explanation": "Squawk 7700 is the general emergency code.",
     "examTip": "7700 emergency, 7600 radio failure, 7500 unlawful interference.",
-    "image": null,
-    "tags": [
-      "transponder"
-    ]
+    "image": null
   },
   {
     "id": "COM-005",
-    "subject": "Communications",
     "topic": "Transponder",
     "difficulty": "Important",
-    "source": "Paper 9 Q9 corrected",
     "status": "needs_review",
     "question": "The transponder display shows code 7000 and the selector is in ON mode. What will be displayed on a controller’s radar?",
     "options": {
@@ -106,19 +82,12 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     "correct": "B",
     "explanation": "In ON mode, the transponder replies with the selected code only. ALT mode is required for code plus pressure altitude.",
     "examTip": "ON = code only. ALT = code + pressure altitude.",
-    "image": "assets/transponder_7000_on.svg",
-    "tags": [
-      "transponder",
-      "on",
-      "alt"
-    ]
+    "image": "assets/transponder_7000_on.svg"
   },
   {
     "id": "COM-006",
-    "subject": "Communications",
     "topic": "Transponder",
     "difficulty": "Important",
-    "source": "DebriefRoom training variant",
     "status": "verified",
     "question": "The transponder display shows code 7000 and the selector is in ALT mode. What will be displayed on a controller’s radar?",
     "options": {
@@ -130,10 +99,74 @@ window.DEBRIEFROOM_COMMUNICATIONS = [
     "correct": "C",
     "explanation": "In ALT mode, the transponder transmits the selected squawk code and pressure altitude.",
     "examTip": "ON sends code only; ALT sends code + pressure altitude.",
-    "image": "assets/transponder_7000_alt.svg",
-    "tags": [
-      "transponder",
-      "alt"
-    ]
+    "image": "assets/transponder_7000_alt.svg"
+  },
+  {
+    "id": "COM-007",
+    "topic": "Readability",
+    "difficulty": "Core",
+    "status": "verified",
+    "question": "Readability 3 means:",
+    "options": {
+      "A": "Perfectly readable",
+      "B": "Unreadable",
+      "C": "Readable but with difficulty",
+      "D": "Readable now and then"
+    },
+    "correct": "C",
+    "explanation": "Readability 3 means readable but with difficulty.",
+    "examTip": "Readability scale: 1 unreadable, 5 perfectly readable.",
+    "image": null
+  },
+  {
+    "id": "COM-008",
+    "topic": "ATIS",
+    "difficulty": "Core",
+    "status": "paper_verified",
+    "question": "A service providing automated airfield and meteorological information for arriving and departing traffic is:",
+    "options": {
+      "A": "AFIS",
+      "B": "ATIS",
+      "C": "FIS",
+      "D": "APIS"
+    },
+    "correct": "B",
+    "explanation": "ATIS provides automatic terminal information.",
+    "examTip": "ATIS = Automatic Terminal Information Service.",
+    "image": null
+  },
+  {
+    "id": "COM-009",
+    "topic": "Distress Calls",
+    "difficulty": "Core",
+    "status": "verified",
+    "question": "Distress is defined as a condition:",
+    "options": {
+      "A": "Where the pilot considers the aircraft has an emergency",
+      "B": "Concerning the safety of an aircraft or other vehicle",
+      "C": "Of grave and/or imminent danger and of requiring immediate assistance",
+      "D": "Concerning the safety of an aircraft and not requiring immediate assistance"
+    },
+    "correct": "C",
+    "explanation": "Distress means grave and imminent danger requiring immediate assistance.",
+    "examTip": "Distress = MAYDAY. Urgency = PAN PAN.",
+    "image": null
+  },
+  {
+    "id": "COM-010",
+    "topic": "Phraseology",
+    "difficulty": "Core",
+    "status": "verified",
+    "question": "STANDBY means:",
+    "options": {
+      "A": "The same as pass your message",
+      "B": "Wait and I will call you",
+      "C": "Repeat your last transmission",
+      "D": "Wait and transmit again"
+    },
+    "correct": "B",
+    "explanation": "Standby means wait; the other station will call you back when ready.",
+    "examTip": "Standby is not permission to continue your message.",
+    "image": null
   }
 ];

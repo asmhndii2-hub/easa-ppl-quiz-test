@@ -1,7 +1,7 @@
 {
   "name": "DebriefRoom",
   "short_name": "DebriefRoom",
-  "description": "Train. Debrief. Master. EASA PPL study and quiz platform.",
+  "description": "Train. Debrief. Master.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0B1220",

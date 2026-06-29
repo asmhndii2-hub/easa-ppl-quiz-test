@@ -1,5 +1,3 @@
-# DebriefRoom v0.6.0 Foundation
+# DebriefRoom v0.7.1 Student Experience
 
-Full identity change from AviPrep to DebriefRoom.
-
-Includes transponder ON/ALT illustrated questions and question verification status.
+Subject-first flow, Continue Learning Card, Next above Previous, 20-question Quiz, and Debrief Summary.
