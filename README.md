@@ -1,25 +1,16 @@
-# DebriefRoom v0.8.4 Communications Safe Import
+# DebriefRoom v0.8.6 Study Focused Mode
 
 Replace only:
 
-`data/communications.js`
+`js/app.js`
 
-## Import summary
+## Study Mode changes
 
-- Source items processed: 84
-- Canonical questions created: 81
-- Merged duplicates: 3
-- Compass questions: 34
-- Needs review: 3
-
-## Notes
-
-This is a safe import patch:
-- Communication Quiz 3 remains the master set.
-- Known additional Paper 9–11 questions were added when they were not duplicates.
-- Duplicate concepts were merged into canonical questions.
-- The compass marker is stored as `badge: "🧭"` for high-value repeated concepts.
-- Explanations and exam tips are intentionally left blank unless verified/approved.
+- Removes multiple-choice options from Study Mode.
+- Removes the Show Answer button.
+- Shows the correct answer immediately in bold, larger text.
+- Keeps only Next and Previous.
+- Quiz and Exam remain unchanged.
 
 Commit:
-`DebriefRoom v0.8.4 communications safe import`
+`DebriefRoom v0.8.6 study focused mode`
