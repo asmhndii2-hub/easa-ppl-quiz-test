@@ -123,7 +123,7 @@ setLastStudy(index){
 top(label,action="App.subject()"){
   return`<div class="topbar">
     <button class="back" onclick="${action}">← ${label}</button>
-    <div class="topVersion">v0.9.1</div>
+    <div class="topVersion">v0.9.3</div>
   </div>`
 },
 
@@ -140,7 +140,7 @@ header(sub){
         <p>${sub}</p>
       </div>
     </div>
-    <div class="version">v0.9.1</div>
+    <div class="version">v0.9.3</div>
   </header>`
 },
 
@@ -301,7 +301,6 @@ study(i=0){
     <div class="questionIndex">Question ${this.current+1} of ${this.q.length}</div>
 
     <span class="badge">${q.id}</span>
-    ${this.status(q)}
     ${q.badge?`<span style="margin-left:8px">${q.badge}</span>`:""}
 
     <button class="secondary"
@@ -365,7 +364,6 @@ renderExam(){
     <div class="questionIndex">Question ${this.exam.index+1} of ${this.exam.questions.length}</div>
 
     <span class="badge">${q.id}</span>
-    ${this.status(q)}
     ${q.badge?`<span style="margin-left:8px">${q.badge}</span>`:""}
 
     <div class="topic">${q.topic} • ${q.difficulty}</div>
@@ -523,7 +521,6 @@ reviewExamMistakes(){
       return`
       <div>
         <span class="badge">${q.id}</span>
-        ${this.status(q)}
         ${q.badge?`<span style="margin-left:8px">${q.badge}</span>`:""}
 
         <div class="topic">${q.topic}</div>

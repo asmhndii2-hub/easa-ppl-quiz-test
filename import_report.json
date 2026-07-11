@@ -1,0 +1,23 @@
+{
+  "papers_processed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "source_questions": 192,
+  "canonical_questions": 174,
+  "merged_duplicates": 18,
+  "compass_questions": 2,
+  "with_explanations": 56,
+  "internal_review_items": 6,
+  "image_questions": 3
+}

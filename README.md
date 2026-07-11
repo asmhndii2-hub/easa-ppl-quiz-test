@@ -1,28 +1,25 @@
-# DebriefRoom v0.9.1 — Multi-Subject Integration
+# DebriefRoom v0.9.3 - Full Air Law Import
 
-This patch makes Air Law visible in the app.
-
-## Replace / add
-
-Replace:
-- `index.html`
+## Replace
+- `data/airlaw.js`
 - `js/app.js`
 
-Add or replace:
-- `data/airlaw.js`
+## Add
+Copy the `assets/airlaw/` folder into your project assets folder.
 
-## What changes
+## Results
+- Papers processed: 1-12
+- Source questions processed: 192
+- Canonical questions after deduplication: 174
+- Duplicate source questions merged: 18
+- Compass questions (confirmed in 3+ papers): 2
+- Questions with verified explanations: 56
+- Internal review items: 6
+- Questions with extracted source illustrations: 3
 
-- Subjects page now shows Communications and Air Law.
-- Each subject has its own progress and Continue Learning position.
-- Study, Quiz, Exam, Bookmarks, and Mistakes work within the selected subject.
-- Study Mode remains question → bold answer → Next / Previous.
-- Quiz and Exam retain shuffled answer text with visible A–D labels in order.
-- Air Law currently contains the verified Paper 1 batch: 16 questions.
-
-## Important
-
-Do not delete `data/communications.js`.
+## UI
+- Internal labels such as `paper_verified` and `needs_review` remain in the data but are hidden from students.
+- The compass remains visible only for confirmed high-frequency questions.
 
 Commit:
-`DebriefRoom v0.9.1 multi subject integration`
+`DebriefRoom v0.9.3 full Air Law import`
