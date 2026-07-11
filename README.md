@@ -1,20 +1,28 @@
-# DebriefRoom v0.9.0 — Air Law Paper 1
+# DebriefRoom v0.9.1 — Multi-Subject Integration
 
-First verified Air Law import batch.
+This patch makes Air Law visible in the app.
 
-## Included
-- 16 questions from Air Law Paper 1
-- Answer key matched from the scanned answer sheet
-- 13 explanations captured/condensed from the scanned explanation pages
-- 3 items marked `needs_review` because their explanation text was not clearly readable
-- Exam Tips intentionally left blank
+## Replace / add
 
-## File
-Add:
+Replace:
+- `index.html`
+- `js/app.js`
 
-`data/airlaw.js`
+Add or replace:
+- `data/airlaw.js`
 
-This patch imports the data only. The next app patch will add Air Law as a selectable subject after more papers are merged and deduplicated.
+## What changes
+
+- Subjects page now shows Communications and Air Law.
+- Each subject has its own progress and Continue Learning position.
+- Study, Quiz, Exam, Bookmarks, and Mistakes work within the selected subject.
+- Study Mode remains question → bold answer → Next / Previous.
+- Quiz and Exam retain shuffled answer text with visible A–D labels in order.
+- Air Law currently contains the verified Paper 1 batch: 16 questions.
+
+## Important
+
+Do not delete `data/communications.js`.
 
 Commit:
-`DebriefRoom v0.9.0 import Air Law Paper 1`
+`DebriefRoom v0.9.1 multi subject integration`
