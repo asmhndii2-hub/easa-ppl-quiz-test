@@ -27,9 +27,16 @@ init(){
 
   this.useSubject("communications");
 
-  Profiles.current()
-    ? this.dashboard()
-    : this.profileSelect()
+  // Skip the profile-selection/sign-in page.
+  // Preserve an existing profile; otherwise use the main Abdulla profile.
+  const savedProfile=Profiles.current();
+  const validProfile=Profiles.list.some(profile=>profile.id===savedProfile);
+
+  if(!validProfile){
+    Profiles.set("p1");
+  }
+
+  this.dashboard()
 },
 
 useSubject(key){
@@ -123,7 +130,7 @@ setLastStudy(index){
 top(label,action="App.subject()"){
   return`<div class="topbar">
     <button class="back" onclick="${action}">← ${label}</button>
-    <div class="topVersion">v0.9.3</div>
+    <div class="topVersion">v0.9.4</div>
   </div>`
 },
 
@@ -140,7 +147,7 @@ header(sub){
         <p>${sub}</p>
       </div>
     </div>
-    <div class="version">v0.9.3</div>
+    <div class="version">v0.9.4</div>
   </header>`
 },
 

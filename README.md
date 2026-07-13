@@ -1,25 +1,17 @@
-# DebriefRoom v0.9.3 - Full Air Law Import
+# DebriefRoom v0.9.4 — Remove Sign-In Page
 
-## Replace
-- `data/airlaw.js`
-- `js/app.js`
+Replace only:
 
-## Add
-Copy the `assets/airlaw/` folder into your project assets folder.
+`js/app.js`
 
-## Results
-- Papers processed: 1-12
-- Source questions processed: 192
-- Canonical questions after deduplication: 174
-- Duplicate source questions merged: 18
-- Compass questions (confirmed in 3+ papers): 2
-- Questions with verified explanations: 56
-- Internal review items: 6
-- Questions with extracted source illustrations: 3
+## Change
 
-## UI
-- Internal labels such as `paper_verified` and `needs_review` remain in the data but are hidden from students.
-- The compass remains visible only for confirmed high-frequency questions.
+- DebriefRoom now opens directly on the Subjects page.
+- The profile-selection/sign-in page is skipped.
+- Existing saved profile and progress are preserved.
+- On a new browser or device, the main Abdulla profile (`p1`) is selected automatically.
+- Communications and Air Law data remain unchanged.
 
 Commit:
-`DebriefRoom v0.9.3 full Air Law import`
+
+`DebriefRoom v0.9.4 remove sign in page`
