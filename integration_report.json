@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "subjects": {
+    "Communications": 81,
+    "Air Law": 174,
+    "Human Performance": 85,
+    "Operational Procedures": 78,
+    "Principles of Flight": 91,
+    "Aircraft General Knowledge": 122,
+    "Meteorology": 124,
+    "Flight Performance & Planning": 106,
+    "Navigation": 103
+  },
+  "total_questions": 964,
+  "new_subject_questions": 709,
+  "data_files": 9,
+  "asset_files": 67,
+  "navigation_practical_route_pages": 44,
+  "sign_in_page_removed": true,
+  "internal_statuses_visible": false,
+  "validation": {
+    "javascript_syntax": "passed",
+    "question_schema": "passed",
+    "global_id_uniqueness": "passed",
+    "image_references": "passed",
+    "dashboard_smoke_test": "passed",
+    "study_and_quiz_flow_smoke_test": "passed"
+  }
+}

@@ -22,6 +22,55 @@ init(){
       icon:"⚖️",
       color:"#7c3aed",
       questions:window.DEBRIEFROOM_AIRLAW||[]
+    },
+    humanperformance:{
+      key:"humanperformance",
+      name:"Human Performance",
+      icon:"🧠",
+      color:"#db2777",
+      questions:window.DEBRIEFROOM_HUMANPERFORMANCE||[]
+    },
+    operationalprocedures:{
+      key:"operationalprocedures",
+      name:"Operational Procedures",
+      icon:"🛟",
+      color:"#ea580c",
+      questions:window.DEBRIEFROOM_OPERATIONALPROCEDURES||[]
+    },
+    principlesofflight:{
+      key:"principlesofflight",
+      name:"Principles of Flight",
+      icon:"🪽",
+      color:"#0891b2",
+      questions:window.DEBRIEFROOM_PRINCIPLESOFFLIGHT||[]
+    },
+    aircraftgeneralknowledge:{
+      key:"aircraftgeneralknowledge",
+      name:"Aircraft General Knowledge",
+      icon:"⚙️",
+      color:"#475569",
+      questions:window.DEBRIEFROOM_AIRCRAFTGENERALKNOWLEDGE||[]
+    },
+    meteorology:{
+      key:"meteorology",
+      name:"Meteorology",
+      icon:"🌦️",
+      color:"#0284c7",
+      questions:window.DEBRIEFROOM_METEOROLOGY||[]
+    },
+    flightperformance:{
+      key:"flightperformance",
+      name:"Flight Performance & Planning",
+      icon:"📊",
+      color:"#16a34a",
+      questions:window.DEBRIEFROOM_FLIGHTPERFORMANCE||[]
+    },
+    navigation:{
+      key:"navigation",
+      name:"Navigation",
+      icon:"🧭",
+      color:"#ca8a04",
+      questions:window.DEBRIEFROOM_NAVIGATION||[]
     }
   };
 
@@ -130,13 +179,10 @@ setLastStudy(index){
 top(label,action="App.subject()"){
   return`<div class="topbar">
     <button class="back" onclick="${action}">← ${label}</button>
-    <div class="topVersion">v0.9.4</div>
+    <div class="topVersion">v1.0.0</div>
   </div>`
 },
 
-status(q){
-  return`<span class="status ${q.status||"paper_verified"}">${(q.status||"paper_verified").replaceAll("_"," ")}</span>`
-},
 
 header(sub){
   return`<header class="hero">
@@ -147,7 +193,7 @@ header(sub){
         <p>${sub}</p>
       </div>
     </div>
-    <div class="version">v0.9.4</div>
+    <div class="version">v1.0.0</div>
   </header>`
 },
 
