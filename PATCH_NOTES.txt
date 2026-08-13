@@ -1,0 +1,25 @@
+DebriefRoom v1.0.1 — Practice Mode Patch
+
+Target:
+- ORIGINAL DebriefRoom project only.
+- Do NOT apply to Debrief50.
+
+Changes:
+- Adds a new Practice tab between Study and Quiz.
+- Practice shows A/B/C/D choices.
+- Selecting an answer immediately shows:
+  - Correct selection in green, or wrong selection in red.
+  - Correct answer highlighted in green.
+  - Explanation under "Why" when available.
+  - Exam Trap when available.
+- One answer attempt per question until navigating away.
+- Previous/Next navigation.
+- Previously answered Practice questions retain their feedback during that Practice session.
+- Existing Study, Quiz, Exam, Bookmarks and Mistakes flows are retained.
+- Version label updated to v1.0.1.
+
+Files replaced:
+- js/app.js
+
+Validation:
+- JavaScript syntax check passed.
