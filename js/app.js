@@ -179,7 +179,7 @@ setLastStudy(index){
 top(label,action="App.subject()"){
   return`<div class="topbar">
     <button class="back" onclick="${action}">← ${label}</button>
-    <div class="topVersion">v1.0.0</div>
+    <div class="topVersion">v1.0.1</div>
   </div>`
 },
 
@@ -193,7 +193,7 @@ header(sub){
         <p>${sub}</p>
       </div>
     </div>
-    <div class="version">v1.0.0</div>
+    <div class="version">v1.0.1</div>
   </header>`
 },
 
@@ -274,6 +274,11 @@ subject(){
       <button class="menuBtn" onclick="App.study(0)">
         <div class="icon">📚</div>
         <div>Study<small>Question and correct answer.</small></div>
+      </button>
+
+      <button class="menuBtn" onclick="App.startPractice()">
+        <div class="icon">⚡</div>
+        <div>Practice<small>Choose an answer and get instant feedback.</small></div>
       </button>
 
       <button class="menuBtn" onclick="App.startExam()">
@@ -384,6 +389,128 @@ study(i=0){
     <button class="primary" onclick="App.study(App.current+1)">Next</button>
     <button class="secondary" onclick="App.study(App.current-1)">Previous</button>
   </section>`)
+},
+
+startPractice(startIndex=0){
+  if(!this.q.length){
+    this.subject();
+    return
+  }
+
+  this.practice={
+    subjectKey:this.activeKey,
+    questions:this.q.map(q=>({
+      ...q,
+      optionOrder:this.shuffle(["A","B","C","D"])
+    })),
+    index:Math.max(0,Math.min(startIndex,this.q.length-1)),
+    answers:{}
+  };
+
+  this.renderPractice()
+},
+
+renderPractice(){
+  if(!this.practice || !this.practice.questions.length){
+    this.subject();
+    return
+  }
+
+  const q=this.practice.questions[this.practice.index];
+  const subject=this.activeSubject();
+  const saved=this.practice.answers[q.id]||null;
+  const bm=Store.get().bookmarks?.[q.id]?"⭐":"☆";
+
+  const optionOrder=q.optionOrder||["A","B","C","D"];
+  const optionHtml=optionOrder.map((originalKey,index)=>{
+    const visibleLetter=this.displayLetters[index];
+    let cls="option";
+
+    if(saved){
+      if(originalKey===q.correct)cls+=" correct";
+      if(originalKey===saved.selected && originalKey!==q.correct)cls+=" wrong";
+      if(originalKey===saved.selected)cls+=" selected";
+    }
+
+    const click=saved?"":`onclick="App.answerPractice('${originalKey}')"`;
+
+    return`<div class="${cls}" data-key="${originalKey}" data-label="${visibleLetter}" ${click}>
+      <div class="letter">${visibleLetter}</div>
+      <div class="optionText">${q.options[originalKey]}</div>
+    </div>`
+  }).join("");
+
+  let feedback="";
+  if(saved){
+    const correctLabel=this.displayLabelFor(q.correct,q.optionOrder);
+    const resultTitle=saved.isCorrect?"✅ Correct":"❌ Not quite";
+    const resultText=saved.isCorrect
+      ? `You selected the correct answer.`
+      : `Correct answer: ${correctLabel}. ${q.options[q.correct]}`;
+
+    const explanation=q.explanation
+      ? `<br><br><b>Why</b><br>${q.explanation}`
+      : "";
+    const examTip=q.examTip
+      ? `<br><br><b>Exam Trap</b><br>${q.examTip}`
+      : "";
+
+    feedback=`<div class="feedback"><b>${resultTitle}</b><br>${resultText}${explanation}${examTip}</div>`;
+  }
+
+  this.mount(`${this.top(subject.name)}
+  <section class="card">
+    <div class="questionIndex">Question ${this.practice.index+1} of ${this.practice.questions.length}</div>
+
+    <span class="badge">${q.id}</span>
+    ${q.badge?`<span style="margin-left:8px">${q.badge}</span>`:""}
+
+    <button class="secondary"
+      style="float:right;width:auto;margin:0;padding:9px 12px"
+      onclick="App.togglePracticeBookmark('${q.id}')">${bm}</button>
+
+    <div class="topic">${q.topic} • ${q.difficulty}</div>
+    <div class="question">${q.question}</div>
+
+    ${this.img(q)}
+    ${optionHtml}
+    ${feedback}
+
+    <button class="primary" onclick="App.practiceMove(1)" ${this.practice.index>=this.practice.questions.length-1?'disabled':''}>Next</button>
+    <button class="secondary" onclick="App.practiceMove(-1)" ${this.practice.index<=0?'disabled':''}>Previous</button>
+  </section>`)
+},
+
+answerPractice(originalKey){
+  if(!this.practice)return;
+
+  const q=this.practice.questions[this.practice.index];
+  if(this.practice.answers[q.id])return;
+
+  const isCorrect=originalKey===q.correct;
+  this.practice.answers[q.id]={
+    selected:originalKey,
+    correct:q.correct,
+    isCorrect
+  };
+
+  Store.mark(q.id,isCorrect);
+  this.renderPractice()
+},
+
+practiceMove(delta){
+  if(!this.practice)return;
+  const next=Math.max(0,Math.min(
+    this.practice.index+delta,
+    this.practice.questions.length-1
+  ));
+  this.practice.index=next;
+  this.renderPractice()
+},
+
+togglePracticeBookmark(id){
+  Store.bookmark(id);
+  this.renderPractice()
 },
 
 toggleBookmark(id){
