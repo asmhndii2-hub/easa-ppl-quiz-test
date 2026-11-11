@@ -5,6 +5,8 @@ activeKey:"communications",
 q:[],
 current:0,
 exam:null,
+mock:null,
+mockSelected:null,
 displayLetters:["A","B","C","D"],
 
 init(){
@@ -179,7 +181,7 @@ setLastStudy(index){
 top(label,action="App.subject()"){
   return`<div class="topbar">
     <button class="back" onclick="${action}">← ${label}</button>
-    <div class="topVersion">v1.0.1</div>
+    <div class="topVersion">v1.0.2</div>
   </div>`
 },
 
@@ -193,7 +195,7 @@ header(sub){
         <p>${sub}</p>
       </div>
     </div>
-    <div class="version">v1.0.1</div>
+    <div class="version">v1.0.2</div>
   </header>`
 },
 
@@ -236,10 +238,165 @@ subjectCard(key){
 
 dashboard(){
   this.mount(`${this.header(`${Profiles.name()} • Select your subject`)}
+  <nav class="card" style="display:flex;gap:10px;padding:12px" aria-label="Main tabs">
+    <button class="primary" style="flex:1;margin:0" aria-current="page">Subjects</button>
+    <button class="secondary" style="flex:1;margin:0" onclick="App.mockSetup()">✈️ MockPrep</button>
+  </nav>
+  <section class="card">
+    <h2 class="sectionTitle">✈️ MockPrep</h2>
+    <p class="subtle">Choose from five subjects, generate 100 proportionally weighted questions, then tap to reveal each answer.</p>
+    <button class="primary" onclick="App.mockSetup()">Open MockPrep</button>
+  </section>
   <section class="card">
     <h2 class="sectionTitle">Subjects</h2>
     ${Object.keys(this.subjects).map(key=>this.subjectCard(key)).join("")}
   </section>`)
+},
+
+// MockPrep is deliberately a reveal-based revision session, not a scored exam.
+// The five subject weights are the agreed 20:28:7:20:25 allocation.
+mockWeights(){
+  return [
+    ["communications",20],
+    ["airlaw",28],
+    ["operationalprocedures",7],
+    ["aircraftgeneralknowledge",20],
+    ["principlesofflight",25]
+  ]
+},
+
+mockSetup(message=""){
+  if(!this.mockSelected)this.mockSelected=this.mockWeights().map(([key])=>key);
+  this.mount(`${this.top("Subjects","App.dashboard()")}
+  <section class="card">
+    <h2 class="sectionTitle">✈️ MockPrep · Click to Reveal</h2>
+    <p class="subtle">Select one or more subjects. Their original exam weights are redistributed to exactly 100 questions.</p>
+    ${this.mockWeights().map(([key,weight])=>{
+      const subject=this.subjects[key];
+      return `<label style="display:flex;align-items:center;gap:12px;padding:14px 8px;border-bottom:1px solid #e2e8f0;cursor:pointer">
+        <input type="checkbox" data-mock-subject="${key}" ${this.mockSelected.includes(key)?"checked":""} onchange="App.setMockSubject('${key}',this.checked)" style="width:20px;height:20px;flex-shrink:0;accent-color:#1d4ed8">
+        <span style="font-weight:700">${subject.icon} ${subject.name}</span><span style="margin-left:auto;color:#64748b">${weight}%</span>
+      </label>`;
+    }).join("")}
+    ${message?`<p style="color:#b91c1c;font-weight:700">${message}</p>`:""}
+    <button class="primary" style="margin-top:20px" onclick="App.startMockReveal()">Generate 100 Questions</button>
+  </section>`)
+},
+
+setMockSubject(key,checked){
+  const selected=new Set(this.mockSelected||[]);
+  if(checked)selected.add(key);else selected.delete(key);
+  this.mockSelected=this.mockWeights().map(([k])=>k).filter(k=>selected.has(k));
+},
+
+// Largest-remainder allocation with capacity caps, yielding exactly 100.
+mockAllocate(selected){
+  const entries=this.mockWeights().filter(([k])=>selected.includes(k));
+  if(!entries.length)throw Error("Select at least one subject.");
+  const totalWeight=entries.reduce((sum,[,w])=>sum+w,0);
+  const available=entries.map(([k,w])=>({key:k,weight:w,capacity:this.subjects[k].questions.length,ideal:100*w/totalWeight,count:0}));
+  if(available.reduce((sum,x)=>sum+x.capacity,0)<100){
+    throw Error("The selected subjects have fewer than 100 questions in total. Select more subjects.");
+  }
+  available.forEach(x=>x.count=Math.min(x.capacity,Math.floor(x.ideal)));
+  let missing=100-available.reduce((sum,x)=>sum+x.count,0);
+  while(missing>0){
+    const candidates=available.filter(x=>x.count<x.capacity);
+    if(!candidates.length)throw Error("Not enough questions to generate the session.");
+    candidates.sort((a,b)=>(b.ideal-b.count)-(a.ideal-a.count) || b.weight-a.weight);
+    candidates[0].count++;
+    missing--;
+  }
+  return available;
+},
+
+mockHistory(){
+  try{return JSON.parse(localStorage.getItem("debriefroom_mock_reveal_history")||"{}")||{}}
+  catch(e){return {}}
+},
+
+makeMockRevealQuestions(alloc){
+  const history=this.mockHistory();
+  const current={...history};
+  const combined=[];
+  alloc.forEach(({key,count})=>{
+    // Shuffle ties; prioritize questions not recently used.
+    const ranked=this.shuffle([...this.subjects[key].questions]).sort((a,b)=>(history[a.id]||0)-(history[b.id]||0));
+    const picked=ranked.slice(0,count);
+    picked.forEach(q=>{current[q.id]=(history[q.id]||0)+1;combined.push({subjectKey:key,question:q})});
+  });
+  try{localStorage.setItem("debriefroom_mock_reveal_history",JSON.stringify(current))}catch(e){}
+  return this.shuffle(combined);
+},
+
+startMockReveal(){
+  try{
+    const allocation=this.mockAllocate(this.mockSelected||[]);
+    const questions=this.makeMockRevealQuestions(allocation);
+    if(questions.length!==100 || new Set(questions.map(x=>x.question.id)).size!==100){
+      throw Error("Question selection failed uniqueness check.");
+    }
+    this.mock={allocation,questions,index:0,revealed:{}};
+    this.renderMockReveal();
+  }catch(e){this.mockSetup(e.message)}
+},
+
+renderMockReveal(){
+  if(!this.mock)return this.mockSetup();
+  const {allocation,questions,index,revealed}=this.mock;
+  const item=questions[index];
+  const q=item.question;
+  const subject=this.subjects[item.subjectKey];
+  const isRevealed=!!revealed[q.id];
+  const choices=["A","B","C","D"].map(letter=>`
+    <div class="option ${isRevealed && letter===q.correct?"correct":""}" style="cursor:default">
+      <div class="letter">${letter}</div><div class="optionText">${q.options[letter]}</div>
+    </div>`).join("");
+  this.mount(`${this.top("MockPrep","App.mockSetup()")}
+  <section class="card">
+    <div class="questionIndex">Question ${index+1} of ${questions.length}</div>
+    <div class="topic">${subject.icon} ${subject.name} · ${q.id}</div>
+    <div class="question">${q.question}</div>
+    ${this.img(q)}
+    ${choices}
+    ${isRevealed?`
+      <div class="feedback" style="margin-top:16px"><b>✅ Answer: ${q.correct}</b><br>${q.options[q.correct]}
+        ${q.explanation?`<br><br><b>Why</b><br>${q.explanation}`:""}
+        ${q.examTip?`<br><br><b>Exam Trap</b><br>${q.examTip}`:""}
+      </div>`:
+      `<button class="primary" style="margin-top:16px" onclick="App.revealMockAnswer()">👁 Reveal Answer</button>`}
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="secondary" style="flex:1" onclick="App.moveMock(-1)" ${index===0?"disabled":""}>← Previous</button>
+      <button class="primary" style="flex:1" onclick="App.moveMock(1)" ${index===questions.length-1?"disabled":""}>Next →</button>
+    </div>
+    <div class="footerNote">${allocation.map(x=>`${this.subjects[x.key].name}: ${x.count}`).join(" · ")}</div>
+    ${index===questions.length-1?`<button class="secondary" onclick="App.mockFinish()">Finish Session</button>`:""}
+  </section>`)
+},
+
+revealMockAnswer(){
+  if(!this.mock)return;
+  const q=this.mock.questions[this.mock.index].question;
+  this.mock.revealed[q.id]=true;
+  this.renderMockReveal();
+},
+
+moveMock(delta){
+  if(!this.mock)return;
+  this.mock.index=Math.max(0,Math.min(this.mock.questions.length-1,this.mock.index+delta));
+  this.renderMockReveal();
+},
+
+mockFinish(){
+  if(!this.mock)return;
+  const shown=Object.keys(this.mock.revealed).length;
+  this.mount(`${this.top("MockPrep","App.dashboard()")}
+  <section class="card">
+    <h2 class="sectionTitle">MockPrep Complete</h2>
+    <p class="subtle">You revealed ${shown} of 100 answers. This revision session is not scored.</p>
+    <button class="primary" onclick="App.mockSetup()">New MockPrep</button>
+    <button class="secondary" onclick="App.dashboard()">Subjects</button>
+  </section>`);
 },
 
 openSubject(key){
